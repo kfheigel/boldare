@@ -1,22 +1,20 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
 
 use App\Entity\Worker;
 use App\Form\WorkerType;
-use Symfony\Component\Uid\Uuid;
-use App\Repository\WorkerRepository;
-use App\Controller\AbstractApiController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Uid\Uuid;
 
 class WorkerController extends AbstractApiController
 {
-
     /**
      * @Route("/api/workers", name="add_worker", methods={"POST"})
      */
@@ -25,8 +23,8 @@ class WorkerController extends AbstractApiController
         $form = $this->buildForm(WorkerType::class);
 
         $form->handleRequest($request);
-        
-        if(!$form->isSubmitted() || !$form->isValid()){
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
 
@@ -39,13 +37,14 @@ class WorkerController extends AbstractApiController
 
         return $this->respond($worker);
     }
+
     /**
      * @Route("/api/workers", name="list_workers", methods={"GET"})
      */
     public function listWorkers(Request $request): Response
     {
-
         $workers = $this->getDoctrine()->getRepository(Worker::class)->findAll();
+
         return $this->respond($workers);
     }
 
@@ -54,16 +53,14 @@ class WorkerController extends AbstractApiController
      */
     public function getWorker(Request $request, string $uuid): Response
     {
-
         $entityManager = $this->getDoctrine()->getManager();
 
         $worker = $entityManager->getRepository(Worker::class)->findOneBy([
-            'uuid' => $uuid
+            'uuid' => $uuid,
         ]);
 
-        if($worker===Null)
-        {
-            throw new NotFoundHttpException("Wrong uuid - worker not found");
+        if (null === $worker) {
+            throw new NotFoundHttpException('Wrong uuid - worker not found');
         }
 
         return $this->respond($worker);
@@ -77,17 +74,17 @@ class WorkerController extends AbstractApiController
         $entityManager = $this->getDoctrine()->getManager();
 
         $worker = $entityManager->getRepository(Worker::class)->findOneBy([
-            'uuid' => $uuid
+            'uuid' => $uuid,
         ]);
 
-        if($worker===Null)
-        {
-            throw new NotFoundHttpException("Wrong uuid - worker not found");
+        if (null === $worker) {
+            throw new NotFoundHttpException('Wrong uuid - worker not found');
         }
 
         $entityManager->remove($worker);
         $entityManager->flush();
-        return new JsonResponse("Worker has been deleted");
+
+        return new JsonResponse('Worker has been deleted');
     }
 
     /**
@@ -95,28 +92,26 @@ class WorkerController extends AbstractApiController
      */
     public function salaryDetails(Request $request): Response
     {
-        
         $allSalaries = 0;
         $workerTypes = ['CEO', 'FOUNDER', 'MANAGER', 'REGULAR'];
         $workers = (array) $this->getDoctrine()->getRepository(Worker::class)->findAll();
 
-
-        foreach ($workerTypes as $type){
-            $typeCount = 0;  
+        foreach ($workerTypes as $type) {
+            $typeCount = 0;
             $typeSalary = 0;
-            foreach($workers as $worker ) {
-
-                if($type === $worker->getWorkerType()){
+            foreach ($workers as $worker) {
+                if ($type === $worker->getWorkerType()) {
                     $typeSalary += $worker->getSalary();
-                    $typeCount += 1; 
+                    ++$typeCount;
                 }
                 $allSalaries += $worker->getSalary();
             }
-            $typeSalary=$typeSalary/$typeCount;
-            $avgArr['average salary for ' . $type] = $typeSalary;
+            $typeSalary = $typeSalary / $typeCount;
+            $avgArr['average salary for '.$type] = $typeSalary;
         }
 
         $avgArr['average salary in company'] = $allSalaries / count($workers);
+
         return new JsonResponse($avgArr);
     }
 }
