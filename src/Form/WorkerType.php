@@ -57,10 +57,10 @@ class WorkerType extends AbstractType
                         'value' => 0,
                         'message' => 'Salary must be above 0 EUR',
                     ]),
-                    // new Type([
-                    //     'type'=> 'integer',
-                    //     'message' => 'Salary must be an integer type'
-                    // ])
+                    new Type([
+                        'type'=> 'numeric',
+                        'message' => 'Salary must be number type'
+                    ])
                 ],
             ])
             ->add('street_name', TextType::class, [
@@ -88,11 +88,11 @@ class WorkerType extends AbstractType
                     new NotNull([
                         'message' => 'Zip code can not be empty',
                     ]),
-                    // new Regex([
-                    //     'pattern' => '/[0-9]{2}-[0-9]{3}/',
-                    //     'match' => true,
-                    //     'message' => 'Your zip-code must be in XX-XXX pattern',
-                    // ])
+                    new Regex([
+                        'pattern' => '/^[0-9]{2}-[0-9]{3}$/',
+                        'match' => true,
+                        'message' => 'Your zip-code must be in XX-XXX pattern',
+                    ])
                 ],
             ])
             ->add('city', TextType::class, [

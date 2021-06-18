@@ -16,6 +16,7 @@ use Symfony\Component\Uid\Uuid;
 class WorkerController extends AbstractApiController
 {
     /**
+     * Adding new worker to database
      * @Route("/api/workers", name="add_worker", methods={"POST"})
      */
     public function addWorker(Request $request): Response
@@ -39,6 +40,7 @@ class WorkerController extends AbstractApiController
     }
 
     /**
+     * Listing all of the workers
      * @Route("/api/workers", name="list_workers", methods={"GET"})
      */
     public function listWorkers(Request $request): Response
@@ -49,6 +51,7 @@ class WorkerController extends AbstractApiController
     }
 
     /**
+     * Getting worker info based on provided uuid
      * @Route("/api/workers/{uuid}", name="get_worker", methods={"GET"})
      */
     public function getWorker(Request $request, string $uuid): Response
@@ -67,6 +70,7 @@ class WorkerController extends AbstractApiController
     }
 
     /**
+     * Deleting worker info based on provided uuid
      * @Route("/api/workers/{uuid}", name="delete_worker", methods={"DELETE"})
      */
     public function deleteWorker(Request $request, string $uuid): JsonResponse
@@ -88,6 +92,7 @@ class WorkerController extends AbstractApiController
     }
 
     /**
+     * Gets the results of avg salaries for certain worker types, and for whole company
      * @Route("/api/salary", name="get_salary", methods={"GET"})
      */
     public function salaryDetails(Request $request): Response
