@@ -92,6 +92,7 @@ class WorkerController extends AbstractApiController
      */
     public function salaryDetails(Request $request): Response
     {
+        $avgArr = [];
         $allSalaries = 0;
         $workerTypes = ['CEO', 'FOUNDER', 'MANAGER', 'REGULAR'];
         $workers = (array) $this->getDoctrine()->getRepository(Worker::class)->findAll();
