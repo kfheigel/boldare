@@ -38,10 +38,10 @@ To upload to the database schemas.
 
 ## Endpoints
 
-| Enpoint            | Method | Description                                                                      |   |
-|--------------------|--------|----------------------------------------------------------------------------------|---|
-| /api/workers       | GET    | Creates new worker from data in body                                             |   |
-| /api/workers/uuid  | GET    | Returns worker by given UUID                                                     |   |
-| /api/workers       | GET    | Returns a list of workers                                                        |   |
-| /api/workers       | POST   | Create new worker from data in body                                              |   |
-| /api/salary        | POST   | Returns JSON with average salary general and average salary for each worker type |   |
+| Enpoint            | Method | Description                                                                      |
+|--------------------|--------|----------------------------------------------------------------------------------|
+| /api/workers       | GET    | Creates new worker from data in body                                             |
+| /api/workers/uuid  | GET    | Returns worker by given UUID                                                     |
+| /api/workers       | GET    | Returns a list of workers                                                        |
+| /api/workers       | POST   | Create new worker from data in body                                              |
+| /api/salary        | POST   | Returns JSON with average salary general and average salary for each worker type |
