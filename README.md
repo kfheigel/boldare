@@ -5,7 +5,7 @@
 * [Endpoints](#endpoints)
 
 ## General info
-This project is simple CRUD api made for boldare company
+This project is simple CRUD api made for Boldare company
 	
 ## Technologies
 Project is created with:
