@@ -22,12 +22,12 @@ class Worker
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Surname;
+    private $surname;
 
     /**
      * @ORM\Column(type="integer")
@@ -71,24 +71,24 @@ class Worker
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getSurname(): ?string
     {
-        return $this->Surname;
+        return $this->surname;
     }
 
-    public function setSurname(string $Surname): self
+    public function setSurname(string $surname): self
     {
-        $this->Surname = $Surname;
+        $this->surname = $surname;
 
         return $this;
     }

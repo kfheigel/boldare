@@ -15,6 +15,7 @@ use Symfony\Component\Uid\Uuid;
 
 class WorkerController extends AbstractApiController
 {
+
     /**
      * Adding new worker to database
      * @Route("/api/workers", name="add_worker", methods={"POST"})
